@@ -45,19 +45,19 @@ document.addEventListener('keydown', function (e) {
   }
 });
 
-// Прокручивание страницы
+// Scrolling the page
 
 btnScrollTo.addEventListener('click', function (e) {
   const section1Coords = section1.getBoundingClientRect();
   console.log(section1Coords);
   console.log(e.target.getBoundingClientRect());
   console.log(
-    'Текущее прокручивание: x, y',
+    'Current scrolling: x, y',
     window.pageXOffset,
     window.pageYOffset
   );
   console.log(
-    'Ширина и высота viewport',
+    'Width and height viewport',
     document.documentElement.clientWidth,
     document.documentElement.clientHeight
   );
@@ -88,11 +88,12 @@ btnScrollTo.addEventListener('click', function (e) {
 //   });
 // });
 
-// Делегирование событий
-// 1. Добавляем event listener для ОБЩЕГО родителя
+// Event delegation
+
+// 1. Adding an event listener for the COMMON parent
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   e.preventDefault();
-  // 2. Определить target элемент
+  // 2. Define target element
   console.log(e.target);
   if (e.target.classList.contains('nav__link')) {
     const href = e.target.getAttribute('href');
@@ -101,18 +102,18 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
   }
 });
 
-// Вкладки
+// Tabs
 
 tabContainer.addEventListener('click', function (e) {
   const clickedButton = e.target.closest('.operations__tab');
-  // Guard clause - Пункт охраны
+  // Guard clause
   if (!clickedButton) return;
 
-  // Активная вкладка
+  // Active tab
   tabs.forEach(tab => tab.classList.remove('operations__tab--active'));
   clickedButton.classList.add('operations__tab--active');
 
-  // Активный контент
+  // Active Content
   tabContents.forEach(content =>
     content.classList.remove('operations__content--active')
   );
@@ -121,7 +122,7 @@ tabContainer.addEventListener('click', function (e) {
     .classList.add('operations__content--active');
 });
 
-// Анимация потускнения на панели навигации
+// Fading animation on navigation bar
 
 const navLinksHoverAnimation = function (e) {
   console.log(this, e.currentTarget);
@@ -141,7 +142,7 @@ const navLinksHoverAnimation = function (e) {
   }
 };
 
-// Работа с аргументами при помощи bind() / this
+// Working with arguments using bind() / this
 nav.addEventListener('mouseover', navLinksHoverAnimation.bind(0.4));
 
 nav.addEventListener('mouseout', navLinksHoverAnimation.bind(1));
@@ -197,7 +198,7 @@ const headerObserver = new IntersectionObserver(getStickyNav, {
 });
 headerObserver.observe(header);
 
-// Появление частей сайта
+// Appearance of parts of the site
 
 const allSections = document.querySelectorAll('.section');
 
@@ -219,7 +220,7 @@ allSections.forEach(function (section) {
   section.classList.add('section--hidden');
 });
 
-// Имплементация lazy loading для изображений
+// Implementation of lazy loading for images
 const lazyImages = document.querySelectorAll('img[data-src]');
 
 const loadImages = function (entries, observer) {
@@ -228,7 +229,7 @@ const loadImages = function (entries, observer) {
 
   if (!entry.isIntersecting) return;
 
-  // Меняем изображение на изображение с высоким разрешением
+  // Changing the image to a high-resolution image
   entry.target.src = entry.target.dataset.src;
   // entry.target.classList.remove('lazy-img');
 
@@ -245,7 +246,7 @@ const lazyImagesObserver = new IntersectionObserver(loadImages, {
 });
 lazyImages.forEach(image => lazyImagesObserver.observe(image));
 
-// Создание слайдера
+// Creating a Slider
 const slides = document.querySelectorAll('.slide');
 const btnLeft = document.querySelector('.slider__btn--left');
 const btnRight = document.querySelector('.slider__btn--right');
